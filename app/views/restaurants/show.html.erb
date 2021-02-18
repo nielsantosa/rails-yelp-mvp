@@ -2,3 +2,26 @@
 <p>Address : <%= @restaurant.address %></p>
 <p>Phone Number : <%= @restaurant.phone_number %></p>
 <p>Category : <%= @restaurant.category %></p>
+
+<h2>Reviews :</h2>
+<ul>
+  <% if @reviews %>
+    <% @reviews.each do |review| %>
+    <li>
+      <div><%= review.content %></div>
+      <div>Rating : <%= review.rating %></div>
+    </li>
+    <% end %>
+  <% end %>
+</ul>
+
+<h5>Add new review for <%= @restaurant.name %></h5>
+<%= simple_form_for [@restaurant, @new_review] do |f| %>
+    <%= f.input :rating %>
+    <%= f.input :content %>
+    <%= f.button :submit, class: "btn btn-primary" %>
+<% end %>
+
+<div>
+  <%= link_to "Back to Lists", root_path %>
+</div>
